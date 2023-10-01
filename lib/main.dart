@@ -1,7 +1,10 @@
 import 'package:articles/features/home/page/home_page.dart';
 import 'package:flutter/material.dart';
 
+import 'app/injection_container.dart';
+
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

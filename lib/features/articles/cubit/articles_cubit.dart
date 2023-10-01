@@ -2,9 +2,12 @@ import 'package:articles/app/core/enums.dart';
 import 'package:articles/domain/models/article_model.dart';
 import 'package:articles/domain/repositories/articles_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'articles_state.dart';
 
+@injectable
 class ArticlesCubit extends Cubit<ArticlesState> {
   ArticlesCubit({required this.articlesRepository}) : super(ArticlesState());
 

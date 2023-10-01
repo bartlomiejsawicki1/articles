@@ -2,9 +2,11 @@ import 'package:articles/app/core/enums.dart';
 import 'package:articles/domain/models/author_model.dart';
 import 'package:articles/domain/repositories/authors_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'home_state.dart';
 
+@injectable
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit({required this.authorsRepository}) : super(HomeState());
 

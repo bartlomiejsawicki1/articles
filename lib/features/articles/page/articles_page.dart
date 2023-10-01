@@ -1,9 +1,11 @@
+import 'dart:ui';
+
 import 'package:articles/app/core/enums.dart';
-import 'package:articles/data/remote_data_sources/articles_remote_data_source.dart';
+import 'package:articles/app/injection_container.dart';
 import 'package:articles/domain/models/article_model.dart';
 import 'package:articles/domain/models/author_model.dart';
-import 'package:articles/domain/repositories/articles_repository.dart';
 import 'package:articles/features/articles/cubit/articles_cubit.dart';
+import 'package:articles/features/text/page/text_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,11 +25,8 @@ class ArticlesPage extends StatelessWidget {
         title: Text(author.name),
       ),
       body: BlocProvider<ArticlesCubit>(
-        create: (context) => ArticlesCubit(
-          articlesRepository: ArticlesRepository(
-            remoteDataSource: ArticlesRemoteDioDataSource(),
-          ),
-        )..fetchData(
+        create: (context) => getIt()
+          ..fetchData(
             authorId: author.id,
           ),
         child: Column(
@@ -61,7 +60,7 @@ class ArticlesPage extends StatelessWidget {
                         children: [
                           for (final author in state.results)
                             _ArticleItemWidget(
-                              model: author,
+                              model: author
                             ),
                         ],
                       );
@@ -89,9 +88,12 @@ class _ArticleItemWidget extends StatelessWidget {
   const _ArticleItemWidget({
     Key? key,
     required this.model,
+    
   }) : super(key: key);
 
   final ArticleModel model;
+  
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,13 @@ class _ArticleItemWidget extends StatelessWidget {
         vertical: 10,
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) =>  TextPage(textModel:   ),
+            ),
+          );
+        },
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,

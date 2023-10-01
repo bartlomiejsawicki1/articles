@@ -1,7 +1,6 @@
 import 'package:articles/app/core/enums.dart';
-import 'package:articles/data/remote_data_sources/authors_remote_data_source.dart';
+import 'package:articles/app/injection_container.dart';
 import 'package:articles/domain/models/author_model.dart';
-import 'package:articles/domain/repositories/authors_repository.dart';
 import 'package:articles/features/articles/page/articles_page.dart';
 import 'package:articles/features/home/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +16,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider<HomeCubit>(
         create: (context) {
-          return HomeCubit(
-            authorsRepository: AuthorsRepository(
-              remoteDataSource: AuthorsRemoteDioDataSource(),
-            ),
-          )..start();
+          return getIt()..start();
         },
         child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
